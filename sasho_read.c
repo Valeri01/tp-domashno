@@ -35,15 +35,6 @@ int main()
 			printf("Failed at %d\n", pos % 4096);
 			return 1;
 		}
-		
-		int seed = verify((void*)mem->array[pos % 4096]);
-		if(seed == -1){
-			printf("Failed at %d\n", pos % 4096);
-			return 1;
-		}
-		else {
-			printf("passed %d\n", pos % 4096);
-		}
 		printf("%d\n", mem->array[pos]);
 		pos++;
 	}
