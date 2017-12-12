@@ -32,13 +32,12 @@ int main()
 		return -1;
 	}
 
-	mem->pos %= 4096;
+	mem->pos = 0;
 	int currVal = mem->array[mem->pos];
 	while(true)
 	{
 		mem->pos++;
-		mem->pos %= 4096;
-		mem->array[mem->pos] = currVal;
+		mem->array[mem->pos % 4096] = currVal;
 		currVal++;
 		if(mem->pos % 512 == 0)
 			sleep(1);
