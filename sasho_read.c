@@ -22,7 +22,7 @@ int main()
 		return -1;
 	}	
 
-	uint64_t pos = mem->pos % 4096;
+	uint64_t pos = mem->pos;
 	printf("starting at %ld\n", pos);
 	while( true )
 	{
@@ -31,9 +31,21 @@ int main()
 			sleep(1);
 			continue;
 		}
+		if(mem->pos >+ pos + 4096) {
+			printf("Failed at %d\n", pos % 4096);
+			return 1;
+		}
+		
+		int seed = verify((void*)mem->array[pos % 4096]);
+		if(seed == -1){
+			printf("Failed at %d\n", pos % 4096);
+			return 1;
+		}
+		else {
+			printf("passed %d\n", pos % 4096);
+		}
 		printf("%d\n", mem->array[pos]);
 		pos++;
-		pos %= 4096;
 	}
 
 	return 0;
